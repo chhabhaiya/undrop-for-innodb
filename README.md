@@ -21,7 +21,7 @@ The source code of the toolkit is hosted on LaunchPad. The tool has been develop
 
 To best way to get the source code is to clone it from GitHub.
 ```
-git clone https://github.com/twindb/undrop-for-innodb.git
+git clone https://github.com/chhabhaiya/undrop-for-innodb.git
 ```
 
 ### Prerequisites
