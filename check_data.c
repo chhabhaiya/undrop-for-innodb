@@ -5,7 +5,7 @@
 
 // Linux has no isnumber function? (Debian 4.0 has no such function)
 #ifndef isnumber
-inline int isnumber(char c) {
+extern inline int isnumber(char c) {
     return (isdigit(c) || c == '.' || c == '-');
 }
 #endif
@@ -13,7 +13,7 @@ inline int isnumber(char c) {
 #define MAX_CHAR_PREFIX_LENGTH 0xfff
 
 /*******************************************************************/
-inline ulonglong make_ulonglong(dulint x) {
+extern inline ulonglong make_ulonglong(dulint x) {
 	ulonglong lx = x.high;
 	lx <<= 32;
 	lx += x.low;
@@ -21,7 +21,7 @@ inline ulonglong make_ulonglong(dulint x) {
 }
 
 /*******************************************************************/
-inline longlong make_longlong(dulint x) {
+extern inline longlong make_longlong(dulint x) {
 	longlong lx = x.high;
 	lx <<= 32;
 	lx += x.low;
@@ -29,7 +29,7 @@ inline longlong make_longlong(dulint x) {
 }
 
 /*******************************************************************/
-inline ibool check_datetime(ulonglong ldate) {
+extern inline ibool check_datetime(ulonglong ldate) {
 	int year, month, day, hour, min, sec;
 
 	ldate &= ~(1ULL << 63);
@@ -71,7 +71,7 @@ inline ibool check_datetime(ulonglong ldate) {
 }
 
 /*******************************************************************/
-inline ibool check_char_ascii(char *value, ulint len) {
+extern inline ibool check_char_ascii(char *value, ulint len) {
 	char *p = value;
 	if (!len) return TRUE;
 	do {
@@ -81,7 +81,7 @@ inline ibool check_char_ascii(char *value, ulint len) {
 }
 
 /*******************************************************************/
-inline ibool check_char_digits(char *value, ulint len) {
+extern inline ibool check_char_digits(char *value, ulint len) {
 	char *p = value;
 	if (!len) return TRUE;
 	do {
@@ -96,7 +96,7 @@ inline ibool check_char_digits(char *value, ulint len) {
 // The function recomputes the regular expression per call. There is
 // no caching of regex. This can be optimized later on.
 /*******************************************************************/
-inline ibool regex_match(const char *string, char *pattern) {
+extern inline ibool regex_match(const char *string, char *pattern) {
 	int status;
 	regex_t re;
 	if(regcomp(&re, pattern, REG_EXTENDED|REG_NOSUB) != 0)
@@ -115,7 +115,7 @@ inline ibool regex_match(const char *string, char *pattern) {
 // statically allocated buffer; otherwise, allocate with malloc.
 // For long texts, this means a lot of overhead.
 /*******************************************************************/
-inline ibool check_regex_match(char *value, ulint len, char *pattern)
+extern inline ibool check_regex_match(char *value, ulint len, char *pattern)
 {
 	static char prefix[MAX_CHAR_PREFIX_LENGTH + 1];
 	char * null_terminated_value = NULL ;
