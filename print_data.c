@@ -78,7 +78,7 @@ int guess_datetime_format(unsigned char* value){
 	return 0;
 	}
 
-inline void print_datetime(unsigned char* value, field_def_t *field) {
+extern inline void print_datetime(unsigned char* value, field_def_t *field) {
 	int year, month, day, hour, min, sec;
 	int format = guess_datetime_format(value);
 	if(format == 1 || format == 0){
@@ -150,7 +150,7 @@ void print_hex(char *value, ulint len) {
 }
 
 /*******************************************************************/
-inline void print_date(ulong ldate) {
+extern inline void print_date(ulong ldate) {
 	int year, month, day;
 
 	ldate &= ~(1UL << 23);
@@ -163,7 +163,7 @@ inline void print_date(ulong ldate) {
 }
 
 /*******************************************************************/
-inline void print_time(unsigned char* value, field_def_t *field) {
+extern inline void print_time(unsigned char* value, field_def_t *field) {
 	int hour, min, sec;
 	ulong ltime = mach_read_from_3(value);
 	
@@ -189,13 +189,13 @@ inline void print_time(unsigned char* value, field_def_t *field) {
 
 
 /*******************************************************************/
-inline void print_enum(int value, field_def_t *field) {
+extern inline void print_enum(int value, field_def_t *field) {
 	fprintf(f_result, "%d", value);
 	//fprintf(f_result, "\"%s\"", field->limits.enum_values[value-1]);
 }
 
 /*******************************************************************/
-inline void print_set(int value, field_def_t *field) {
+extern inline void print_set(int value, field_def_t *field) {
   /*    int i;
          int comma = 0
 	fprintf(f_result, "\"");
@@ -212,7 +212,7 @@ inline void print_set(int value, field_def_t *field) {
 }
 
 /*******************************************************************/
-inline unsigned long long int get_uint_value(field_def_t *field, byte *value) {
+extern inline unsigned long long int get_uint_value(field_def_t *field, byte *value) {
 	switch (field->fixed_length) {
 		case 1: return mach_read_from_1(value);
 		case 2: return mach_read_from_2(value);
@@ -227,7 +227,7 @@ inline unsigned long long int get_uint_value(field_def_t *field, byte *value) {
 }
 
 /*******************************************************************/
-inline long long int get_int_value(field_def_t *field, byte *value) {
+extern inline long long int get_int_value(field_def_t *field, byte *value) {
 	char v1;
 	short int v2;
 	int v3, v4;
@@ -255,7 +255,7 @@ inline long long int get_int_value(field_def_t *field, byte *value) {
 }
 
 /*******************************************************************/
-inline void print_string(char *value, ulint len, field_def_t *field) {
+extern inline void print_string(char *value, ulint len, field_def_t *field) {
     uint i, num_spaces = 0, out_pos = 0;
     static char out[32768];
     
@@ -317,7 +317,7 @@ size_t strip_space(const char* str_in, char* str_out){
 }
 
 /*******************************************************************/
-inline void print_decimal(byte *value, field_def_t *field) {
+extern inline void print_decimal(byte *value, field_def_t *field) {
     char string_buf[256];
     char string_buf2[256];
     decimal_digit_t dec_buf[256];
@@ -334,7 +334,7 @@ inline void print_decimal(byte *value, field_def_t *field) {
 }
 
 /*******************************************************************/
-inline void print_field_value(byte *value, ulint len, field_def_t *field) {
+extern inline void print_field_value(byte *value, ulint len, field_def_t *field) {
   /* time_t t;*/
 
 	switch (field->type) {

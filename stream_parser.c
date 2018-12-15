@@ -293,7 +293,7 @@ void show_progress(off64_t offset, off64_t length){
     return;
 }
 
-inline void process_ibpage(page_t* page){
+extern inline void process_ibpage(page_t* page){
     uint32_t page_id = mach_read_from_4(page + FIL_PAGE_OFFSET);
     uint64_t index_id = mach_read_from_8(page + PAGE_HEADER + PAGE_INDEX_ID);
     uint16_t page_type = mach_read_from_2(page + FIL_PAGE_TYPE);
